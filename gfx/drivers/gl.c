@@ -72,6 +72,10 @@
 #include "../../menu/menu_driver.h"
 #endif
 
+#if defined(_WIN32) && !defined(_XBOX)
+#include "../common/win32_common.h"
+#endif
+
 #ifndef GL_UNSIGNED_INT_8_8_8_8_REV
 #define GL_UNSIGNED_INT_8_8_8_8_REV       0x8367
 #endif
@@ -2206,8 +2210,7 @@ static bool gl_set_shader(void *data,
    gl_set_shader_viewports(gl);
    context_bind_hw_render(true);
 #if defined(_WIN32) && !defined(_XBOX)
-   /* Shader dialog is disabled for now, until video_threaded issues are fixed.
-   shader_dlg_params_reload();*/
+   shader_dlg_params_reload();
 #endif
 
 #endif

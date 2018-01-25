@@ -52,6 +52,7 @@
 #include "../../retroarch.h"
 #include "../../gfx/video_driver.h"
 #include "../../tasks/tasks_internal.h"
+#include "../../verbosity.h"
 
 #include "ui_win32.h"
 
@@ -365,7 +366,7 @@ void shader_dlg_show(HWND parent_hwnd)
    window->set_focused(&g_shader_dlg.window);
 }
 
-#if 0
+#if defined(HAVE_OPENGL) || defined(HAVE_VULKAN)
 static LRESULT CALLBACK ShaderDlgWndProc(HWND hwnd, UINT message,
       WPARAM wparam, LPARAM lparam)
 {
@@ -522,10 +523,8 @@ bool win32_window_init(WNDCLASSEX *wndclass,
    if (class_name != NULL)
       return true;
 
-   /* Shader dialog is disabled for now, until
-    * video_threaded issues are fixed.
    if (!win32_shader_dlg_init())
-      RARCH_ERR("[WGL]: wgl_shader_dlg_init() failed.\n");*/
+      RARCH_ERR("[WGL]: wgl_shader_dlg_init() failed.\n");
    return true;
 }
 
